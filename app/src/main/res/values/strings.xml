@@ -9,8 +9,8 @@
     <string name="correct_toast"> Correct!!</string>
     <string name="incorrect_toast"> Incorrect!!</string>
 
-    <string name="question_1">new york is the largest city</string>
-    <string name="question_2">new york is the largest city</string>
-    <string name="question_3">new york is the largest city</string>
+    <string name="question_1">New York City is the largest city</string>
+    <string name="question_2">Sun rises in the West</string>
+    <string name="question_3">The Pacific Ocean is lager than the Atlantic Ocean.</string>
 
 </resources>
