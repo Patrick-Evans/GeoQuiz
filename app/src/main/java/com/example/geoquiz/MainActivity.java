@@ -1,5 +1,6 @@
 package com.example.geoquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +10,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button myTrueButton;
-    private Button myFalseButton;
+    private Button mTrueButton;
+    private Button mFalseButton;
+    private Button mCheatButton;
     private Button mNextButton;
     private TextView mQuestionTextView;
 
@@ -33,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 
+    private void updateQuestion(){
+        int question = mQuestionBank[mCurrentIndex].getTextResId();
+        mQuestionTextView.setText(question);
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -41,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
 
-        myTrueButton = findViewById(R.id.true_button);
-        myTrueButton.setOnClickListener(new View.OnClickListener() {
+        mTrueButton = findViewById(R.id.true_button);
+        mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, "true", Toast.LENGTH_SHORT).show();
@@ -50,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        myFalseButton = findViewById(R.id.false_button);
-        myFalseButton.setOnClickListener(new View.OnClickListener() {
+        mFalseButton = findViewById(R.id.false_button);
+        mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this, R.string.false_button, Toast.LENGTH_SHORT).show();
@@ -59,12 +66,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mCheatButton = findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                Intent i = new Intent(MainActivity.this, CheatActivity.class);
+                startActivity(i);
+            }
+        });
+
         mNextButton = findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                int question = mQuestionBank[mCurrentIndex].getTextResId();
-                mQuestionTextView.setText(question);
+                updateQuestion();
             }
         });
     }
